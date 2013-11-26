@@ -50,7 +50,7 @@ i = 0
 p = 0
 c = 0
 
-#Set the number of Tweets you want
+#Set the number of Tweets you want; here 10,000
 TWEETS_TO_GET = 10000
 
 t = time.time()
@@ -86,8 +86,11 @@ for item in r.get_iterator():
             tdefile.close()
             break
         print item
+        
+        
     except:
         continue
 
 print time.time() - t, p, c
-#tdefile.close()
+
+tdefile.close()
