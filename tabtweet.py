@@ -69,6 +69,7 @@ for item in r.get_iterator():
         
         if item['place']: 
             #print item['place']
+            #we have ['place']['ABC'] because place is kind of like a sub-hierarchy within the JSON
             newrow.setString(5,item['place']['country'])
             newrow.setString(8,item['place']['country_code'])
             newrow.setString(9,item['place']['place_type'])
