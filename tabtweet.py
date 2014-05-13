@@ -53,7 +53,10 @@ c = 0
 #Set the number of Tweets you want; here 10,000
 TWEETS_TO_GET = 10000
 
+#time here is just for debugging/testing as the code runs; timeouts and such
 t = time.time()
+
+#here we actually loop through Twitter's JSON metadata to pull it into our TDE columnar format
 for item in r.get_iterator():
     try:
         newrow = tde.Row(tableDef)
@@ -77,7 +80,7 @@ for item in r.get_iterator():
             newrow.setDouble(7,item['coordinates']['coordinates'][1])
             c += 1
         
-        
+        #insert the data we just cleaned up
         table.insert(newrow)
         i += 1
         print i
