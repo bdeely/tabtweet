@@ -1,3 +1,7 @@
+#To-Do List
+#Make a few error handling functions
+#make it append data so that it can be run at different times without just overwriting the original file
+
 from TwitterAPI import TwitterAPI
 import time
 import dataextract as tde
