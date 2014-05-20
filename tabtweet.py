@@ -96,6 +96,6 @@ for item in r.get_iterator():
     except:
         continue
 
-print time.time() - t, p, c
+print time.time() - t, place_count, coord_count
 
 tdefile.close()
