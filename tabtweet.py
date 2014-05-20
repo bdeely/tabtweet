@@ -37,10 +37,7 @@ table = tdefile.addTable('Extract', tableDef)
 
 
 
-#Right below we authenticate ourselves
-#You have to enter the credentials from your own Twitter dev. account.
-#This will be found after signing into your dev.twitter.com account
-#Go to My Applications >> OAuth tool to find them
+#Right below we authenticate ourselves. Enter your own stuff; not sharing mine!
 consumerkey = ''
 consumersecret = ''
 authtoken = ''
@@ -50,9 +47,9 @@ api = TwitterAPI(consumerkey,consumersecret,authtoken,authsecret)
 
 r = api.request('statuses/sample', {})
 
-i = 0
-p = 0
-c = 0
+item_count = 0
+place_count = 0
+coord_count = 0
 
 #Set the number of Tweets you want; here 10,000
 TWEETS_TO_GET = 10000
@@ -78,19 +75,19 @@ for item in r.get_iterator():
             newrow.setString(8,item['place']['country_code'])
             newrow.setString(9,item['place']['place_type'])
             newrow.setString(10,item['place']['full_name'])
-            p += 1
+            place_count += 1
         
         if item['coordinates']:
             newrow.setDouble(6,item['coordinates']['coordinates'][0])
             newrow.setDouble(7,item['coordinates']['coordinates'][1])
-            c += 1
+            coord_count += 1
         
         #insert the data we just cleaned up
         table.insert(newrow)
-        i += 1
-        print i
+        item_count += 1
+        print item_count
         if not i % 10: print i
-        if i == TWEETS_TO_GET: 
+        if item_count == TWEETS_TO_GET: 
             tdefile.close()
             break
         print item
