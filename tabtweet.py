@@ -7,6 +7,7 @@ import time
 import dataextract as tde
 import os
 
+
 #All of this is for creating the Tableau extract
 tdename = 'tableautwitter.tde'
 try:
@@ -16,6 +17,7 @@ except:
     tdefile = tde.Extract(tdename)
 
 fields = ['created_at', 'id', 'text', 'source', 'lang', 'place']
+    
     
 #Create the tableDef
 tableDef = tde.TableDefinition()
@@ -31,10 +33,9 @@ tableDef.addColumn('country_code', tde.Type.UNICODE_STRING)
 tableDef.addColumn('place_type', tde.Type.UNICODE_STRING)
 tableDef.addColumn('full_name', tde.Type.UNICODE_STRING)
 
+
 #Step 3: Create the table in the image of tableDef
 table = tdefile.addTable('Extract', tableDef)
-
-
 
 
 #Right below we authenticate ourselves. Enter your own stuff; not sharing mine!
@@ -42,20 +43,23 @@ consumerkey = ''
 consumersecret = ''
 authtoken = ''
 authsecret = ''
-
+#let's not let this authentication thing get repetitive 
 api = TwitterAPI(consumerkey,consumersecret,authtoken,authsecret)
-
 r = api.request('statuses/sample', {})
+
 
 item_count = 0
 place_count = 0
 coord_count = 0
 
+
 #Set the number of Tweets you want; here 10,000
 TWEETS_TO_GET = 10000
 
+
 #time here is just for debugging/testing as the code runs; timeouts and such
 t = time.time()
+
 
 #here we actually loop through Twitter's JSON metadata to pull it into our TDE columnar format
 for item in r.get_iterator():
